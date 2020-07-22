@@ -105,6 +105,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </li>
 
             <li class="nav-item">
+              <router-link to="/developer" class="nav-link">
+                <i class="nav-icon fas fa-cogs"></i>
+                <p>
+                  Developers
+                </p>
+              </router-link>
+            </li>
+
+            <li class="nav-item">
               <a class="nav-link" href="{{ route('logout') }}"
                   onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
@@ -131,6 +140,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="content">
         <div class="container-fluid">
           <router-view></router-view>
+          <!-- set progressbar -->
+          <vue-progress-bar></vue-progress-bar>
         </div><!-- /.container-fluid -->
       </div>
       <!-- /.content -->
