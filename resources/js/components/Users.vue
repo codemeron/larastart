@@ -87,9 +87,10 @@
                             <select v-model="form.type" type="text" name="type" id="type"
                                 class="form-control" :class="{ 'is-invalid': form.errors.has('type') }">
                                 <option value="" selected disabled>Select User Role</option>
-                                <option value="Admin">Admin</option>
-                                <option value="User">Standard User</option>
-                                <option value="Author">Author</option>
+                                <option value="Admin">System Administrator</option>
+                                <option value="User">School Administrator</option>
+                                <option value="Author">Program Head</option>
+                                <option value="Author">Adviser</option>
                             </select>
                             <has-error :form="form" field="type"></has-error>
                         </div>
