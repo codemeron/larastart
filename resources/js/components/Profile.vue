@@ -185,7 +185,7 @@
                                 <div class="form-group row">
                                     <label for="txtPassword" class="col-sm-2 col-form-label">Password</label>
                                     <div class="col-sm-10">
-                                        <input v-model="form.password" type="text" class="form-control" id="txtPassword" placeholder="Password">
+                                        <input v-model="form.password" type="password" class="form-control" id="txtPassword" placeholder="Password">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -254,13 +254,12 @@
                         title: 'Profile Update',
                         text: 'Update successfully!',
                     });
-                    this.form.photo = response.data.picture;
-                }).catch( () => {
+                    if(response.data.picture){this.form.photo = response.data.picture;}
+                }).catch( (response) => {
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
-                        text: response.data,
-                        footer: '<a href>Why do I have this issue?</a>'
+                        text: response.message
                     })
                 });
             },

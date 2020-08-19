@@ -1,8 +1,8 @@
 <template>
     <div class="container">
-        <div class="row mt-5">
+        <div class="row mt-5" v-if="$gate.isSystemAdministrator()">
           <div class="col-12">
-            <div class="card">
+            <div class="card" >
               <div class="card-header">
                 <h3 class="card-title">Users Table</h3>
 
@@ -25,7 +25,7 @@
                   </thead>
 
                   <tbody>
-                    <tr v-for="user in users" :key="user.id">
+                    <tr v-for="user in users.data" :key="user.id">
                       <td>{{ user.id }}</td>
                       <td>{{ user.name }}</td>
                       <td>{{ user.email }}</td>
@@ -44,9 +44,16 @@
                 </table>
               </div>
               <!-- /.card-body -->
+              <div class="card-footer">
+                  <pagination :data="users" @pagination-change-page="getResults"></pagination>
+              </div>
             </div>
             <!-- /.card -->
           </div>
+        </div>
+
+        <div class="row mt-5" v-if="!$gate.isSystemAdministrator()">
+            <not-found></not-found>
         </div>
     
     <!-- Modal -->
@@ -134,6 +141,13 @@
             }
         },
         methods: {
+            getResults(page = 1) 
+            {
+                axios.get('api/user?page=' + page)
+                .then(response => {
+                    this.users = response.data;
+                });
+		    },
             updateUser(){
                 this.$Progress.start();
                 this.form.put('api/user/' + this.form.id).then( () => {
@@ -157,7 +171,10 @@
                 $('#modelId').modal('show');
             },
             loadUsers(){
-                axios.get("api/user").then(({ data }) => (this.users = data.data));
+                if(this.$gate.isSystemAdministrator())
+                {
+                    axios.get("api/user").then(({ data }) => (this.users = data));
+                }
             },
             createUser(){
                 this.$Progress.start();
@@ -195,8 +212,8 @@
                             this.form.delete('api/user/' + id).then( () => {
                                 Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
                                 Fire.$emit('RecordAdded');
-                            }).catch(() => {
-                                Swal.fire('Failed', 'Record not deleted.', 'error');
+                            }).catch((result) => {
+                                Swal.fire('Failed', result.message, 'error');
                             });    
                         }
                     });
@@ -204,6 +221,16 @@
             
         },
         created() {
+            Fire.$on('searching', () => {
+                let query = this.$parent.search;
+                axios.get('api/findUser?q=' + query)
+                .then((data) => {
+                    this.users =data.data;
+                })
+                .catch(() =>{
+
+                });
+            });
             this.loadUsers();
             Fire.$on('RecordAdded', () => {
                 this.loadUsers();

@@ -29,7 +29,7 @@ class UserController extends Controller
             'email' => 'bail|required|string|email|max:191|unique:users',
             'password' => 'required|string|min:8'
         ]);
-
+        
         return User::create([
             'name' => $request['name'],
             'email' => $request['email'],
@@ -61,7 +61,7 @@ class UserController extends Controller
         ]);
 
         $currentPhoto = $user->photo;
-        $name;
+        $name = "";
        if($request->photo != $currentPhoto){
             $name = time() . '.' . explode('/', explode(':', substr($request->photo, 0, strpos($request->photo, ';')))[1])[1];
             \Image::make($request->photo)->save(public_path('img/profile/').$name);
@@ -95,6 +95,8 @@ class UserController extends Controller
             'email' => 'bail|required|string|email|max:191|unique:users,email,'.$user->id,
             'password' => 'sometimes|string|min:8'
         ]);
+        
+        $request->merge(['password' => Hash::make($request['password'])]);
 
         $user->update($request->all());
         return ['message' => 'Update the user info.'];
@@ -102,7 +104,23 @@ class UserController extends Controller
 
     public function destroy($id)
     {
+        $this->authorize('isSystemAdministrator');
+
         $user = User::findOrFail($id);
         $user->delete();
+    }
+
+    public function search(){
+        if($search = \Request::get('q'))
+        {
+            $users = User::where(function($query) use ($search){
+                $query->where('name', 'LIKE', "%$search%")
+                ->orWhere('email', 'LIKE', "%$search%");
+            })->paginate(10);
+        }else{
+            return User::latest()->paginate(10); 
+        }
+
+        return $users;
     }
 }

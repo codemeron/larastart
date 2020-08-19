@@ -31,9 +31,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- SEARCH FORM -->
       <form class="form-inline ml-3">
         <div class="input-group input-group-sm">
-          <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+          <input class="form-control form-control-navbar" @keyup="searchit" v-model="search" type="search" placeholder="Search" aria-label="Search">
           <div class="input-group-append">
-            <button class="btn btn-navbar" type="submit">
+            <button class="btn btn-navbar" @click.prevent="searchit">
               <i class="fas fa-search"></i>
             </button>
           </div>
@@ -46,7 +46,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="index3.html" class="brand-link">
-        <img src="./img/logo.png" alt="LaraStart Logo" class="brand-image img-circle elevation-3"
+        <img src="/img/logo.png" alt="LaraStart Logo" class="brand-image img-circle elevation-3"
             style="opacity: .8">
         <span class="brand-text font-weight-light">Lara Start</span>
       </a>
@@ -56,7 +56,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="image">
-            <img src="./img/user.png" class="img-circle elevation-2" alt="User Image">
+            <img src="/img/user.png" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
             <a href="#" class="d-block">  {{ Auth::user()->name }} </a>
@@ -81,7 +81,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <a href="#" class="nav-link">
                 <i class="nav-icon fa fa-cog text-teal"></i>
                 <p>
-                  Management
+                  Records
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
@@ -89,7 +89,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <li class="nav-item">
                   <router-link to="/users" class="nav-link">
                     <i class="fas fa-users nav-icon"></i>
-                    <p>Users</p>
+                    <p>System Users</p>
+                  </router-link>
+                </li>
+                <li class="nav-item">
+                  <router-link to="/students" class="nav-link">
+                    <i class="fas fa-users nav-icon"></i>
+                    <p>Students</p>
                   </router-link>
                 </li>
               </ul>
@@ -103,7 +109,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </p>
               </router-link>
             </li>
-
+            
+            @can('isSystemAdministrator')
             <li class="nav-item">
               <router-link to="/developer" class="nav-link">
                 <i class="nav-icon fas fa-cogs"></i>
@@ -112,6 +119,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </p>
               </router-link>
             </li>
+            @endcan
 
             <li class="nav-item">
               <a class="nav-link" href="{{ route('logout') }}"
@@ -169,6 +177,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </footer>
   </div>
   <!-- ./wrapper -->
+  @auth
+    <script>
+      window.user = @json(auth()->user());
+    </script>
+  @endauth
 
   <!-- REQUIRED SCRIPTS -->
   <script src="/js/app.js"></script>

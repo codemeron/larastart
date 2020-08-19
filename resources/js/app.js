@@ -47,6 +47,10 @@ window.Form = Form;
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
 
+//Gate.js
+import Gate from "./components/Gate";
+Vue.prototype.$gate = new Gate(window.user);
+
 //Import the vue router
 import VueRouter from 'vue-router';
 Vue.use(VueRouter);
@@ -55,7 +59,9 @@ let routes = [
     { path: '/dashboard', component: require('./components/Dashboard.vue').default },
     { path: '/developer', component: require('./components/Developer.vue').default },
     { path: '/profile', component: require('./components/Profile.vue').default },
-    { path: '/users', component: require('./components/Users.vue').default }
+    { path: '/users', component: require('./components/Users.vue').default },
+    { path: '/students', component: require('./components/Students.vue').default },
+    { path: '*', component: require('./components/NotFound.vue').default }
   ];
 
 const router = new VueRouter({
@@ -91,6 +97,13 @@ Vue.component(
   require('./components/passport/PersonalAccessTokens.vue').default
 );
 
+Vue.component(
+  'not-found',
+  require('./components/NotFound.vue').default
+);
+
+Vue.component('pagination', require('laravel-vue-pagination'));
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -103,6 +116,8 @@ Vue.component(
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('register-tes', require('./components/RegistrationTES.vue').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -112,5 +127,17 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
-    router
+    router,
+    data: {
+      search: ''
+    },
+    methods: {
+      searchit: _.debounce(() => {
+        Fire.$emit('searching');
+      },1000),
+
+      printme() {
+        window.print();
+      }
+    }
 });
