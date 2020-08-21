@@ -19,7 +19,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::apiResources(['user' => 'API\UserController']);
+Route::apiResources([
+    'user' => 'API\UserController',
+    'register' => 'API\RegisterStudent'
+]);
+
+
 Route::get('profile', 'API\UserController@profile');
 Route::get('findUser', 'API\UserController@search');
 Route::put('profile', 'API\UserController@updateProfile');
+
+Route::put('addStudent', 'API\RegisterStudent@store');
+Route::get('loadStudent', 'API\RegisterStudent@index');

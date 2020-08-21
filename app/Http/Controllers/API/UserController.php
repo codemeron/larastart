@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers\API;
 
+//Default classes
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
+//Imported classes
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use Intervention\Image\ImageManager;
+
 
 class UserController extends Controller
 {

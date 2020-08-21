@@ -231,7 +231,9 @@
 
                 });
             });
+            
             this.loadUsers();
+
             Fire.$on('RecordAdded', () => {
                 this.loadUsers();
             });
