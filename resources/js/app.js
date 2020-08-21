@@ -47,6 +47,10 @@ const Toast = Swal.mixin({
 window.Toast = Toast;
 //Swwet Alert API end
 
+//For mask input; The Mask input for Vue.js
+import VueTheMask from 'vue-the-mask';
+Vue.use(VueTheMask);
+
 
 
 //Gate.js

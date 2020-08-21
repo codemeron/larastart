@@ -252,7 +252,9 @@ legend {
                           v-model="form.contactnumber"
                           type="tel"
                           class="form-control"
+                          placeholder="Contact Number"
                           id="txtstudentcontactnumber"
+                          v-mask="'####-###-####'"
                           required
                         />
                       </div>
@@ -432,6 +434,7 @@ legend {
                           class="form-control"
                           id="txtgcontactnumber"
                           placeholder="Contact Number"
+                          v-mask="'####-###-####'"
                           required
                         />
                       </div>
