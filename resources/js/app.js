@@ -51,8 +51,6 @@ window.Toast = Toast;
 import VueTheMask from 'vue-the-mask';
 Vue.use(VueTheMask);
 
-
-
 //Gate.js
 import Gate from "./components/Gate";
 Vue.prototype.$gate = new Gate(window.user);
@@ -66,7 +64,7 @@ let routes = [
     { path: '/developer', component: require('./components/Developer.vue').default },
     { path: '/profile', component: require('./components/Profile.vue').default },
     { path: '/users', component: require('./components/Users.vue').default },
-    { path: '/students', component: require('./components/Students.vue').default },
+    { path: '/regstudents', component: require('./components/reg_students.vue').default },
     { path: '*', component: require('./components/NotFound.vue').default }
   ];
 

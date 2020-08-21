@@ -9,7 +9,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>LaraStart</title>
+  <title>KONEKtayo: Pro-file</title>
 
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -76,10 +76,42 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </p>
               </router-link>
             </li>
-
+            <!--registration-->
             <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-cog text-teal"></i>
+                <i class="nav-icon fas fa-user-plus text-teal"></i>
+                <p>
+                  Registration
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <router-link to="/faculty" class="nav-link">
+                    <i class="fas fa-plus-circle nav-icon"></i>
+                    <p>Faculty</p>
+                  </router-link>
+                </li>
+                <li class="nav-item">
+                  <router-link to="/students" class="nav-link">
+                    <i class="fas fa-plus-circle nav-icon"></i>
+                    <p>Students</p>
+                  </router-link>
+                </li>
+                <li class="nav-item">
+                  <router-link to="/users" class="nav-link">
+                    <i class="fas fa-plus-circle nav-icon"></i>
+                    <p>System Users</p>
+                  </router-link>
+                </li>
+              </ul>
+            </li>
+            <!--/registration-->
+
+            <!--record-->
+            <li class="nav-item has-treeview">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-server text-teal"></i>
                 <p>
                   Records
                   <i class="right fas fa-angle-left"></i>
@@ -87,20 +119,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <router-link to="/users" class="nav-link">
-                    <i class="fas fa-users nav-icon"></i>
-                    <p>System Users</p>
+                  <router-link to="/faculty" class="nav-link">
+                    <i class="fas fa-database nav-icon"></i>
+                    <p>Faculty</p>
                   </router-link>
                 </li>
                 <li class="nav-item">
                   <router-link to="/students" class="nav-link">
-                    <i class="fas fa-users nav-icon"></i>
+                    <i class="fas fa-database nav-icon"></i>
                     <p>Students</p>
+                  </router-link>
+                </li>
+                <li class="nav-item">
+                  <router-link to="/users" class="nav-link">
+                    <i class="fas fa-database nav-icon"></i>
+                    <p>System Users</p>
                   </router-link>
                 </li>
               </ul>
             </li>
-
+            <!--/record-->
+            
             <li class="nav-item">
               <router-link to="/profile" class="nav-link">
                 <i class="nav-icon fas fa-user text-orange"></i>
