@@ -29,18 +29,57 @@ class UserController extends Controller
     {
 
         $this->validate($request, [
+            'designation' => $request['designation'],
+            'department'  => $request['designation'], 
+            'course'  => $request['designation'], 
+            'yearlevel'  => $request['designation'], 
+            'section'  => $request['designation'], 
+            'office'  => $request['designation'], 
+            'idnumber'  => $request['designation'], 
+            'firstname'  => $request['designation'], 
+            'middlename'  => $request['designation'], 
+            'lastname'  => $request['designation'], 
+            'extension'  => $request['designation'], 
+            'gender'  => $request['designation'], 
+            'birthdate'  => $request['designation'], 
+            'email'  => $request['designation'], 
+            'contactnumber'  => $request['designation'], 
+            'purok'  => $request['designation'], 
+            'barangay'  => $request['designation'], 
+            'municipality'  => $request['designation'], 
+            'province'  => $request['designation'], 
+            'password'  => Hash::make($request['designation']), 
+            'role'  => $request['designation'], 
+            'photo'  => $request['designation']
+            
             'name' => 'required|string|max:191',
             'email' => 'bail|required|string|email|max:191|unique:users',
             'password' => 'required|string|min:8'
         ]);
         
         return User::create([
-            'name' => $request['name'],
-            'email' => $request['email'],
-            'type' => $request['type'],
-            'bio' => $request['bio'],
-            'photo' => $request['photo'],
-            'password' => Hash::make($request['password'])
+            'designation' => $request['designation'],
+             'department'  => $request['designation'], 
+             'course'  => $request['designation'], 
+             'yearlevel'  => $request['designation'], 
+             'section'  => $request['designation'], 
+             'office'  => $request['designation'], 
+             'idnumber'  => $request['designation'], 
+             'firstname'  => $request['designation'], 
+             'middlename'  => $request['designation'], 
+             'lastname'  => $request['designation'], 
+             'extension'  => $request['designation'], 
+             'gender'  => $request['designation'], 
+             'birthdate'  => $request['designation'], 
+             'email'  => $request['designation'], 
+             'contactnumber'  => $request['designation'], 
+             'purok'  => $request['designation'], 
+             'barangay'  => $request['designation'], 
+             'municipality'  => $request['designation'], 
+             'province'  => $request['designation'], 
+             'password'  => Hash::make($request['designation']), 
+             'role'  => $request['designation'], 
+             'photo'  => $request['designation']
         ]);
     }
 

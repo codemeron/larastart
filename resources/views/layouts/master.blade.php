@@ -87,21 +87,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <router-link to="/faculty" class="nav-link">
+                  <router-link to="/registerfaculty" class="nav-link">
                     <i class="fas fa-plus-circle nav-icon"></i>
-                    <p>Faculty</p>
+                    <p>Faculty | Employee</p>
                   </router-link>
                 </li>
                 <li class="nav-item">
-                  <router-link to="/students" class="nav-link">
+                  <router-link to="/registerstudent" class="nav-link">
                     <i class="fas fa-plus-circle nav-icon"></i>
                     <p>Students</p>
-                  </router-link>
-                </li>
-                <li class="nav-item">
-                  <router-link to="/users" class="nav-link">
-                    <i class="fas fa-plus-circle nav-icon"></i>
-                    <p>System Users</p>
                   </router-link>
                 </li>
               </ul>
@@ -209,10 +203,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <footer class="main-footer">
       <!-- To the right -->
       <div class="float-right d-none d-sm-inline">
-        Anything you want
+        konektayo. konektado.
       </div>
       <!-- Default to the left -->
-      <strong>Copyright &copy; 2020 <a href="https://codemeron.github.io/">codemeron</a>.</strong> All rights reserved.
+      <strong>Copyright &copy; 2020 <a href="https://codemeron.github.io/">IT'sMambu</a>.</strong> All rights reserved.
     </footer>
   </div>
   <!-- ./wrapper -->
