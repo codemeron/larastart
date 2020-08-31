@@ -73,9 +73,9 @@ class UserController extends Controller
              'barangay'  => $request['designation'], 
              'municipality'  => $request['designation'], 
              'province'  => $request['designation'], 
-             'password'  => Hash::make($request['designation']), 
-             'role'  => $request['designation'], 
-             'photo'  => $request['designation']
+             'password'  => Hash::make($request['password']), 
+             'role'  => $request['role'], 
+             'photo'  => $request['photo']
         ]);
     }
 
