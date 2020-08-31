@@ -29,32 +29,28 @@ class UserController extends Controller
     {
 
         $this->validate($request, [
-            'designation' => $request['designation'],
-            'department'  => $request['designation'], 
-            'course'  => $request['designation'], 
-            'yearlevel'  => $request['designation'], 
-            'section'  => $request['designation'], 
-            'office'  => $request['designation'], 
-            'idnumber'  => $request['designation'], 
-            'firstname'  => $request['designation'], 
-            'middlename'  => $request['designation'], 
-            'lastname'  => $request['designation'], 
-            'extension'  => $request['designation'], 
-            'gender'  => $request['designation'], 
-            'birthdate'  => $request['designation'], 
-            'email'  => $request['designation'], 
-            'contactnumber'  => $request['designation'], 
-            'purok'  => $request['designation'], 
-            'barangay'  => $request['designation'], 
-            'municipality'  => $request['designation'], 
-            'province'  => $request['designation'], 
-            'password'  => Hash::make($request['designation']), 
-            'role'  => $request['designation'], 
-            'photo'  => $request['designation']
-            
-            'name' => 'required|string|max:191',
-            'email' => 'bail|required|string|email|max:191|unique:users',
-            'password' => 'required|string|min:8'
+            'designation' => 'required|string|max:50',
+            'department'  => 'required|string|max:50',
+            'course'  => 'required|string|max:100', 
+            'yearlevel'  => 'required|string|max:4',
+            'section'  => 'required|string|max:3', 
+            'office'  => 'required|string|max:100',
+            'idnumber'  => 'required|string|max:17|unique:users',
+            'firstname'  => 'required|string|max:50',
+            'middlename'  => 'required|string|max:50', 
+            'lastname'  => 'required|string|max:50', 
+            'extension'  => 'required|string|max:3',
+            'gender'  => 'required|string|max:6', 
+            'birthdate'  => 'required|date', 
+            'email'  => 'required|string|max:191|unique:users', 
+            'contactnumber'  => 'required|string|max:11', 
+            'purok'  => 'required|string|max:50',  
+            'barangay'  => 'required|string|max:50', 
+            'municipality'  => 'required|string|max:50', 
+            'province'  => 'required|string|max:50',  
+            'password'  => 'required|string|min:8',  
+            'role'  => 'required|string|min:191',
+            'photo'  => 'required|string|min:191'
         ]);
         
         return User::create([

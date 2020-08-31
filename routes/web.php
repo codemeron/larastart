@@ -25,5 +25,9 @@ Route::get('invoice', function(){
     return view('invoice');
 });
 
+Route::get('applicant', function(){
+    return view('layouts/applicant');
+});
+
 Route::get('/{any}', 'HomeController@index')->where('any', '.*');
 
