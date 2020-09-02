@@ -61,7 +61,7 @@ Vue.use(VueRouter);
 
 let routes = [
     { path: '/applicant', component: require('./components/Applicant.vue').default },
-    { path: '/dashboard', component: require('./components/Dashboard.vue').default },
+    { path: '/home', component: require('./components/Dashboard.vue').default },
     { path: '/developer', component: require('./components/Developer.vue').default },
     { path: '/profile', component: require('./components/Profile.vue').default },
     { path: '/users', component: require('./components/Users.vue').default },
@@ -72,7 +72,10 @@ let routes = [
     { path: '*', component: require('./components/NotFound.vue').default }
   ];
 
-const router = new VueRouter({mode: 'history', routes});
+const router = new VueRouter({
+  mode: 'history', 
+  routes
+});
 
 //Filters
 Vue.filter('upText', function(text){
@@ -110,7 +113,7 @@ Vue.component(
 Vue.component('pagination', require('laravel-vue-pagination'));
 
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('dashboard', require('./components/Dashboard.vue').default);
 Vue.component('register-tes', require('./components/RegistrationTES.vue').default);
 
 

@@ -37,8 +37,8 @@ class LoginController extends Controller
             case 'Applicant':
                     return '/applicant';
                 break;
-            case 'Employee':
-                    return '/projects';
+            case 'System Administrator':
+                    return '/home';
                 break; 
             default:
                     return '/login'; 

@@ -26,20 +26,35 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::define('isSystemAdministrator', function($user){
-            return $user->type === 'System Administrator';
+            return $user->role === 'System Administrator';
         });
 
         Gate::define('isSchoolAdministrator', function($user){
-            return $user->type === 'School Administrator';
+            return $user->role === 'School Administrator';
         });
 
         Gate::define('isProgramHead', function($user){
-            return $user->type === 'Program Head';
+            return $user->role === 'Program Head';
         });
 
         Gate::define('isAdviser', function($user){
-            return $user->type === 'Adviser';
+            return $user->role === 'Adviser';
         });
+
+        Gate::define('isApplicant', function($user){
+            return $user->role === 'Applicant';
+        });
+
+
+        /*You may authorize multiple actions at a time with the any or none methods:
+
+        if (Gate::any(['update-post', 'delete-post'], $post)) {
+            // The user can update or delete the post
+        }
+
+       if (Gate::none(['update-post', 'delete-post'], $post)) {
+        // The user cannot update or delete the post
+       }*/
 
     }
 }

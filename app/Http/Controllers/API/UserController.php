@@ -84,6 +84,10 @@ class UserController extends Controller
         //
     }
 
+    public static function applicant(){
+        return User::Applicant();
+    }
+
     public function profile()
     {
         return auth('api')->user();
