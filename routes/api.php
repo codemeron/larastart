@@ -24,8 +24,13 @@ Route::apiResources([
     'register' => 'API\RegisterStudent'
 ]);
 
+//API/UserController : Approval of Role.
+Route::put('roleUpdate/{idnumber}', 'API\UserController@roleUpdate');
+Route::post('/user/roleUpdateAll', 'API\UserController@roleUpdateAll');
+Route::post('/user/newRegisteredUser', 'API\UserController@newRegisteredUser');
 
-Route::put('update/{idnumber}', 'API\UserController@update');
+
+
 Route::get('profile', 'API\UserController@profile');
 Route::get('findUser', 'API\UserController@search');
 Route::put('profile', 'API\UserController@updateProfile');

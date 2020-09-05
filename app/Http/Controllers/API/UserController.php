@@ -129,14 +129,36 @@ class UserController extends Controller
         
     }
 
-    public function update(Request $request, $idnumber)
+    //Resources/js/applicant/ApplicantList.vue/approveRoleAll()
+    //Assign individual role to newly registered users.
+    public function roleUpdate(Request $request, $idnumber)
     {
         $role = $request['role'];
 
         User::where('idnumber', $idnumber)->update(['role' => $role]);
     }
 
-    public function destroy($id)
+
+    //Resources/js/applicant/ApplicantList.vue/approvedRoleIndividual()
+    //Assign individual role to all newly registered users.
+    public function roleUpdateAll(Request $request)
+    {
+        $roles = $request['users'];
+
+        foreach ($roles as $role){
+            User::where('idnumber', $role['idnumber'])->update(['role' => $request['role']]);
+        }
+    }
+
+
+    //Resources/views/layouts/master.blade.php/numberOfNewlyRegisteredUser()
+    //Get total number of newly registered user.
+    public function newRegisteredUser(){
+        $countNewlyRegistered = User::where('role', 'Applicant')->count();
+
+        return $countNewlyRegistered;
+    }
+    public function destroy($id) 
     {
         $this->authorize('isSystemAdministrator');
 

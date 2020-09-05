@@ -158,13 +158,7 @@
                 <i class="nav-icon fas fa-user-check"></i>
                 <p>
                   Users Request &nbsp; 
-                  <span class="badge badge-info">
-                    @php
-                     
-                      $applicant = UserController::applicant();
-                      echo $applicant;
-                    @endphp
-                  </span>
+                  <span class="badge badge-info" id="spanNewlyRegisteredUser"></span>
                 </p>
               </router-link>
             </li>
@@ -232,6 +226,17 @@
 
   <!-- REQUIRED SCRIPTS -->
   <script src="/js/app.js"></script>
+  <script>
+    //app/Http/Controllers/API/UserController.php/newRegisteredUser()
+    //Get total number of newly registered user.
+    function numberOfNewlyRegisteredUser(){
+      axios.post('api/user/newRegisteredUser', {}).then((response) => {
+        document.getElementById('spanNewlyRegisteredUser').innerHTML = response.data;
+      });
+    }
+    numberOfNewlyRegisteredUser();
+    window.setInterval(numberOfNewlyRegisteredUser, 10000);
+  </script>
 
 </body>
 </html>
