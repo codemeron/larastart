@@ -3248,10 +3248,20 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    //app/Http/Controllers/API/UserController.php/index()
+    //Pagination for newly registered users.
+    getResults: function getResults() {
+      var _this = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      axios.get('api/user/newRegisteredUserPagination?page=' + page).then(function (response) {
+        _this.users = response.data;
+      });
+    },
     //app/Http/Controllers/API/UserController.php/roleUpdateAll()
     //Assign individual role to newly registered users.
     approveRoleAll: function approveRoleAll() {
-      var _this = this;
+      var _this2 = this;
 
       var varApproveAll = document.getElementById('cboApproveAll').value;
 
@@ -3260,26 +3270,26 @@ __webpack_require__.r(__webpack_exports__);
           role: varApproveAll,
           users: this.users
         }).then(function () {
-          _this.loadUsers();
+          _this2.loadUsers();
 
-          _this.showModal = false;
+          _this2.showModal = false;
         });
       }
     },
     loadUsers: function loadUsers() {
-      var _this2 = this;
+      var _this3 = this;
 
       //if(this.$gate.isSystemAdministrator())
       //{
       axios.get("api/user").then(function (_ref) {
         var data = _ref.data;
-        _this2.users = data;
+        _this3.users = data;
       }); //}
     },
     //app/Http/Controllers/API/UserController.php/roleUpdate()
     //Assign individual role to newly registered users.  
     approvedRoleIndividual: function approvedRoleIndividual(idnumber, event) {
-      var _this3 = this;
+      var _this4 = this;
 
       Swal.fire({
         title: "Role",
@@ -3297,7 +3307,7 @@ __webpack_require__.r(__webpack_exports__);
           }).then(function () {
             $('#divApproveRoleAs').modal(hide);
 
-            _this3.loadUsers();
+            _this4.loadUsers();
           });
         }
       });
@@ -71270,7 +71280,9 @@ var render = function() {
       _c("div", { staticClass: "col-12" }, [
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-header" }, [
-            _c("h3", { staticClass: "card-title" }, [_vm._v("Users Table")]),
+            _c("h3", { staticClass: "card-title" }, [
+              _vm._v("NEWLY REGISTERED USERS")
+            ]),
             _vm._v(" "),
             _c("div", { staticClass: "card-tools" }, [
               _c(
@@ -71295,10 +71307,10 @@ var render = function() {
             _c("table", { staticClass: "table table-hover text-nowrap" }, [
               _vm._m(0),
               _vm._v(" "),
-              _vm.users.length != 0
+              _vm.users.data > 0
                 ? _c(
                     "tbody",
-                    _vm._l(_vm.users, function(user) {
+                    _vm._l(_vm.users.data, function(user) {
                       return _c("tr", { key: user.idnumber }, [
                         _c("td", [_vm._v(_vm._s(user.idnumber))]),
                         _vm._v(" "),
@@ -71366,7 +71378,17 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "card-footer" })
+          _c(
+            "div",
+            { staticClass: "card-footer" },
+            [
+              _c("pagination", {
+                attrs: { data: _vm.users },
+                on: { "pagination-change-page": _vm.getResults }
+              })
+            ],
+            1
+          )
         ])
       ])
     ]),

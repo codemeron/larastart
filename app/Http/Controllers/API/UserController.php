@@ -20,9 +20,17 @@ class UserController extends Controller
         $this->middleware('auth:api');
     }
 
+
+    //Resources/js/applicant/ApplicantList.vue/getResults()
+    //Assign individual role to newly registered users.
+    public function newRegisteredUserPagination()
+    {
+        return User::where('role', '=', 'Applicant')->paginate(10); 
+    }
+
     public function index()
     {
-        return User::paginate(10)->where('role', '==', 'Applicant'); 
+        return User::where('role', '=', 'Applicant')->paginate(10); 
     }
 
     public function store(Request $request)
@@ -143,7 +151,7 @@ class UserController extends Controller
     //Assign individual role to all newly registered users.
     public function roleUpdateAll(Request $request)
     {
-        $roles = $request['users'];
+        $roles = $request['users']['data'];
 
         foreach ($roles as $role){
             User::where('idnumber', $role['idnumber'])->update(['role' => $request['role']]);

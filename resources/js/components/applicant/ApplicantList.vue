@@ -4,7 +4,7 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">Users Table</h3>
+            <h3 class="card-title">NEWLY REGISTERED USERS</h3>
 
             <div class="card-tools">
               <!--data-toggle="modal" data-target="#divApproveRoleAs"-->
@@ -28,8 +28,8 @@
                 </tr>
               </thead>
 
-              <tbody v-if ="users.length !=0">
-                <tr v-for="user in users" :key="user.idnumber">
+              <tbody v-if ="users.data > 0">
+                <tr v-for="user in users.data" :key="user.idnumber">
                   <td>{{ user.idnumber }}</td>
                   <td>{{ user.lastname }}</td>
                   <td>{{ user.firstname }}</td>
@@ -58,7 +58,7 @@
           </div>
           <!-- /.card-body -->
           <div class="card-footer">
-            <!--<pagination :data="users" @pagination-change-page="getResults"></pagination>-->
+            <pagination :data="users" @pagination-change-page="getResults"></pagination>
           </div>
         </div>
         <!-- /.card -->
@@ -115,6 +115,15 @@ export default {
     };
   },
   methods: {
+    //app/Http/Controllers/API/UserController.php/index()
+    //Pagination for newly registered users.
+    getResults(page = 1){
+      axios.get('api/user/newRegisteredUserPagination?page=' + page).then(response => {
+        this.users = response.data;
+      });
+    },
+
+
     //app/Http/Controllers/API/UserController.php/roleUpdateAll()
     //Assign individual role to newly registered users.
     approveRoleAll() {
@@ -130,6 +139,8 @@ export default {
         }); 
       }
     },  
+
+
     loadUsers() {
       //if(this.$gate.isSystemAdministrator())
       //{
@@ -139,6 +150,8 @@ export default {
 
       //}
     },
+
+
     //app/Http/Controllers/API/UserController.php/roleUpdate()
     //Assign individual role to newly registered users.  
     approvedRoleIndividual(idnumber, event) {
@@ -163,7 +176,8 @@ export default {
             });
         }
       });
-    },
+    }
+
   },
   created() {
     this.loadUsers();

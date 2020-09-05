@@ -28,6 +28,7 @@ Route::apiResources([
 Route::put('roleUpdate/{idnumber}', 'API\UserController@roleUpdate');
 Route::post('/user/roleUpdateAll', 'API\UserController@roleUpdateAll');
 Route::post('/user/newRegisteredUser', 'API\UserController@newRegisteredUser');
+Route::post('/user/newRegisteredUserPagination', 'API\UserController@newRegisteredUserPagination');
 
 
 
