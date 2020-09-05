@@ -40,7 +40,7 @@ class User extends Authenticatable
     ];
 
     public function scopeApplicant(){
-        $query = User::where('id', '==', 'Applicant')->get();
+        $query = User::where('role', '==', 'Applicant')->get();
         $applicantCount = $query->count();
 
         return $applicantCount;

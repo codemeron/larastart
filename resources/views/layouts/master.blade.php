@@ -2,10 +2,7 @@
    use App\Http\Controllers\API\UserController;
 ?>
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
+
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -157,7 +154,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </li>
 
             <li class="nav-item">
-              <router-link to="/developer" class="nav-link">
+              <router-link to="/applicantlist" class="nav-link">
                 <i class="nav-icon fas fa-user-check"></i>
                 <p>
                   Users Request &nbsp; 
@@ -171,10 +168,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </p>
               </router-link>
             </li>
-
-
-
-
             @endcan
 
             <li class="nav-item">

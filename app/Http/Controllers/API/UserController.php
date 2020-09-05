@@ -22,7 +22,7 @@ class UserController extends Controller
 
     public function index()
     {
-        return User::latest()->paginate(10); 
+        return User::paginate(10)->where('role', '==', 'Applicant'); 
     }
 
     public function store(Request $request)
@@ -129,20 +129,11 @@ class UserController extends Controller
         
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $idnumber)
     {
-        $user = User::findOrFail($id);
+        $role = $request['role'];
 
-        $this->validate($request, [
-            'name' => 'required|string|max:191',
-            'email' => 'bail|required|string|email|max:191|unique:users,email,'.$user->id,
-            'password' => 'sometimes|string|min:8'
-        ]);
-        
-        $request->merge(['password' => Hash::make($request['password'])]);
-
-        $user->update($request->all());
-        return ['message' => 'Update the user info.'];
+        User::where('idnumber', $idnumber)->update(['role' => $role]);
     }
 
     public function destroy($id)
