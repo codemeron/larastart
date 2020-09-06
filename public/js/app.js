@@ -5591,10 +5591,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5618,69 +5614,26 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      axios.get('api/user/newRegisteredUserPagination?page=' + page).then(function (response) {
-        _this.users = response.data;
+      axios.post('api/user/facultyEmployeePagination?page=' + page).then(function (_ref) {
+        var data = _ref.data;
+        return _this.users = data;
       });
     },
     //app/Http/Controllers/API/UserController.php/roleUpdateAll()
     //Assign individual role to newly registered users.
-    approveRoleAll: function approveRoleAll() {
+    loadFacultyEmployee: function loadFacultyEmployee() {
       var _this2 = this;
-
-      var varApproveAll = document.getElementById('cboApproveAll').value;
-
-      if (varApproveAll != "") {
-        axios.post('api/user/roleUpdateAll', {
-          role: varApproveAll,
-          users: this.users
-        }).then(function () {
-          _this2.loadUsers();
-
-          _this2.showModal = false;
-        });
-      }
-    },
-    //app/Http/Controllers/API/UserController.php/roleUpdateAll()
-    //Assign individual role to newly registered users.
-    loadNewlyRegisteredUsers: function loadNewlyRegisteredUsers() {
-      var _this3 = this;
 
       //if(this.$gate.isSystemAdministrator())
       //{
-      axios.get("api/user/loadNewlyRegisteredUsers").then(function (_ref) {
-        var data = _ref.data;
-        _this3.users = data;
+      axios.post("api/user/viewFacultyEmployee").then(function (_ref2) {
+        var data = _ref2.data;
+        _this2.users = data;
       }); //}
-    },
-    //app/Http/Controllers/API/UserController.php/roleUpdate()
-    //Assign individual role to newly registered users.  
-    approvedRoleIndividual: function approvedRoleIndividual(idnumber, event) {
-      var _this4 = this;
-
-      Swal.fire({
-        title: "Role",
-        text: "Assign this user as " + event.target.value + "?",
-        icon: "question",
-        showCancelButton: true,
-        confirmButtonText: "Yes",
-        cancelButtonText: "No"
-      }).then(function (result) {
-        if (result.value) {
-          console.log(event.target.value);
-          axios.post("api/roleUpdate/" + idnumber, {
-            role: event.target.value,
-            _method: "put"
-          }).then(function () {
-            $('#divApproveRoleAs').modal(hide);
-
-            _this4.loadUsers();
-          });
-        }
-      });
     }
   },
   created: function created() {
-    this.loadNewlyRegisteredUsers();
+    this.loadFacultyEmployee();
   }
 });
 
@@ -76261,7 +76214,7 @@ var render = function() {
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-header" }, [
             _c("h3", { staticClass: "card-title" }, [
-              _vm._v("REGISTERED USERS")
+              _vm._v("REGISTERED FACULTY AND EMPLOYEE")
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "card-tools" }, [
@@ -76276,8 +76229,10 @@ var render = function() {
                   }
                 },
                 [
-                  _vm._v("\n              Approve All As\n              "),
-                  _c("i", { staticClass: "fas fa-check-square fa-fw" })
+                  _vm._v(
+                    "\n              Add Faculty/Employee\n              "
+                  ),
+                  _c("i", { staticClass: "fas fa-user-plus fa-fw" })
                 ]
               )
             ])
@@ -76287,7 +76242,7 @@ var render = function() {
             _c("table", { staticClass: "table table-hover text-nowrap" }, [
               _vm._m(0),
               _vm._v(" "),
-              _vm.users.data > 0
+              Object.keys(_vm.users.data).length
                 ? _c(
                     "tbody",
                     _vm._l(_vm.users.data, function(user) {
@@ -76304,50 +76259,33 @@ var render = function() {
                           _vm._v(_vm._s(_vm._f("myDate")(user.created_at)))
                         ]),
                         _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(user.role))]),
+                        _vm._v(" "),
                         _c("td", [
                           _c(
-                            "select",
+                            "a",
                             {
-                              staticClass: "form-control",
-                              attrs: { id: user.idnumber },
+                              attrs: { href: "#", title: "Edit" },
                               on: {
-                                change: function($event) {
-                                  return _vm.approvedRoleIndividual(
-                                    user.idnumber,
-                                    $event
-                                  )
+                                click: function($event) {
+                                  return _vm.editModal(user)
                                 }
                               }
                             },
-                            [
-                              _c(
-                                "option",
-                                {
-                                  attrs: {
-                                    value: "",
-                                    selected: "",
-                                    disabled: ""
-                                  }
-                                },
-                                [_vm._v("--Select a Role--")]
-                              ),
-                              _vm._v(" "),
-                              _c("option", { attrs: { value: "Faculty" } }, [
-                                _vm._v("Faculty")
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "option",
-                                { attrs: { value: "Program Head" } },
-                                [_vm._v("Program Head")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "option",
-                                { attrs: { value: "School Administrator" } },
-                                [_vm._v("School Administrator")]
-                              )
-                            ]
+                            [_c("i", { staticClass: "fas fa-edit text-blue" })]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              attrs: { href: "#", title: "Delete" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.deleteUser(user.idnumber)
+                                }
+                              }
+                            },
+                            [_c("i", { staticClass: "fas fa-trash text-red" })]
                           )
                         ])
                       ])

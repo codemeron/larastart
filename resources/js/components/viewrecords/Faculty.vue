@@ -4,13 +4,12 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">REGISTERED USERS</h3>
+            <h3 class="card-title">REGISTERED FACULTY AND EMPLOYEE</h3>
 
             <div class="card-tools">
-              <!--data-toggle="modal" data-target="#divApproveRoleAs"-->
               <button class="btn btn-success" @click="showModal = true" >
-                Approve All As
-                <i class="fas fa-check-square fa-fw"></i>
+                Add Faculty/Employee
+                <i class="fas fa-user-plus fa-fw"></i>
               </button>
             </div>
           </div>
@@ -28,24 +27,21 @@
                 </tr>
               </thead>
 
-              <tbody v-if ="users.data > 0">
+              <tbody v-if ="Object.keys(users.data).length">
                 <tr v-for="user in users.data" :key="user.idnumber">
                   <td>{{ user.idnumber }}</td>
                   <td>{{ user.lastname }}</td>
                   <td>{{ user.firstname }}</td>
                   <td>{{ user.middlename }}</td>
                   <td>{{ user.created_at | myDate }}</td>
+                  <td>{{ user.role }}</td>
                   <td>
-                    <select
-                      v-bind:id="user.idnumber"
-                      class="form-control"
-                      @change="approvedRoleIndividual(user.idnumber, $event)"
-                    >
-                      <option value selected disabled>--Select a Role--</option>
-                      <option value="Faculty">Faculty</option>
-                      <option value="Program Head">Program Head</option>
-                      <option value="School Administrator">School Administrator</option>
-                    </select>
+                      <a href="#" title="Edit" @click="editModal(user)">
+                          <i class="fas fa-edit text-blue"></i>
+                      </a> 
+                      <a href="#" title="Delete" @click="deleteUser(user.idnumber)">
+                          <i class="fas fa-trash text-red"></i>
+                      </a>
                   </td>
                 </tr>
               </tbody>
@@ -118,70 +114,23 @@ export default {
     //app/Http/Controllers/API/UserController.php/index()
     //Pagination for newly registered users.
     getResults(page = 1){
-      axios.get('api/user/newRegisteredUserPagination?page=' + page).then(response => {
-        this.users = response.data;
-      });
+      axios.post('api/user/facultyEmployeePagination?page=' + page).then( ( {data} ) => this.users = data);
     },
 
-
     //app/Http/Controllers/API/UserController.php/roleUpdateAll()
     //Assign individual role to newly registered users.
-    approveRoleAll() {
-      var varApproveAll = document.getElementById('cboApproveAll').value;
-      if (varApproveAll != ""){
-        axios.post('api/user/roleUpdateAll', {
-          role: varApproveAll,
-          users: this.users
-        })
-        .then(() => {
-          this.loadUsers();
-          this.showModal = false;
-        }); 
-      }
-    },  
-
-    //app/Http/Controllers/API/UserController.php/roleUpdateAll()
-    //Assign individual role to newly registered users.
-    loadNewlyRegisteredUsers() {
+    loadFacultyEmployee() {
       //if(this.$gate.isSystemAdministrator())
       //{
-      axios.get("api/user/loadNewlyRegisteredUsers").then(({ data }) => {
+      axios.post("api/user/viewFacultyEmployee").then(({ data }) => {
         this.users = data;
       });
 
       //}
     },
-
-
-    //app/Http/Controllers/API/UserController.php/roleUpdate()
-    //Assign individual role to newly registered users.  
-    approvedRoleIndividual(idnumber, event) {
-      Swal.fire({
-        title: "Role",
-        text: "Assign this user as " + event.target.value + "?",
-        icon: "question",
-        showCancelButton: true,
-        confirmButtonText: "Yes",
-        cancelButtonText: "No",
-      }).then((result) => {
-        if (result.value) {
-          console.log(event.target.value);
-          axios
-            .post("api/roleUpdate/" + idnumber, {
-              role: event.target.value,
-              _method: "put",
-            })
-            .then(() => {
-              $('#divApproveRoleAs').modal(hide);
-              this.loadUsers();
-            });
-        }
-      });
-    }
-
   },
   created() {
-    this.loadNewlyRegisteredUsers();
+    this.loadFacultyEmployee();
   },
 };
 </script>

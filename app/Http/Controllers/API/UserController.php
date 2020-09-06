@@ -20,9 +20,20 @@ class UserController extends Controller
         $this->middleware('auth:api');
     }
 
-    public function loadFacultyAndEmployee()
+    public function loadFacultyEmployee()
     {
-        return User::where('role', '!=', 'Applicant')->paginate(5); 
+        return User::where('role', '!=', 'Applicant')
+            ->orderBy('lastname')
+            ->paginate(10); 
+    }
+
+    //Resources/js/viewrecords/Faculty.vue/getResults()
+    //Pagination for Faculty and Employee Table.
+    public function facultyEmployeePagination()
+    {
+        return User::where('role', '!=', 'Applicant')
+            ->orderBy('lastname')
+            ->paginate(10);
     }
 
     public function store(Request $request)
@@ -153,12 +164,11 @@ class UserController extends Controller
 
     
     //Resources/js/applicant/ApplicantList.vue/getResults()
-    //Assign individual role to newly registered users.
+    //Pagination for newly registered user.
     public function newRegisteredUserPagination()
     {
         return User::where('role', '=', 'Applicant')->paginate(5); 
     }
-
 
     //Resources/js/applicant/ApplicantList.vue/approveRoleAll()
     //Assign individual role to newly registered users.
