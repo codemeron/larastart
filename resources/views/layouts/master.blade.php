@@ -115,19 +115,13 @@
                 <li class="nav-item">
                   <router-link to="/faculty" class="nav-link">
                     <i class="fas fa-database nav-icon"></i>
-                    <p>Faculty</p>
+                    <p>Faculty/Employee</p>
                   </router-link>
                 </li>
                 <li class="nav-item">
                   <router-link to="/students" class="nav-link">
                     <i class="fas fa-database nav-icon"></i>
                     <p>Students</p>
-                  </router-link>
-                </li>
-                <li class="nav-item">
-                  <router-link to="/users" class="nav-link">
-                    <i class="fas fa-database nav-icon"></i>
-                    <p>System Users</p>
                   </router-link>
                 </li>
               </ul>

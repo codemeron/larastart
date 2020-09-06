@@ -4,7 +4,7 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">NEWLY REGISTERED USERS</h3>
+            <h3 class="card-title">REGISTERED USERS</h3>
 
             <div class="card-tools">
               <!--data-toggle="modal" data-target="#divApproveRoleAs"-->
@@ -28,7 +28,7 @@
                 </tr>
               </thead>
 
-              <tbody v-if ="Object.keys(users.data).length">
+              <tbody v-if ="users.data > 0">
                 <tr v-for="user in users.data" :key="user.idnumber">
                   <td>{{ user.idnumber }}</td>
                   <td>{{ user.lastname }}</td>
@@ -118,7 +118,9 @@ export default {
     //app/Http/Controllers/API/UserController.php/index()
     //Pagination for newly registered users.
     getResults(page = 1){
-      axios.post('api/user/newRegisteredUserPagination?page=' + page).then( ( {data} ) => this.users = data);
+      axios.get('api/user/newRegisteredUserPagination?page=' + page).then(response => {
+        this.users = response.data;
+      });
     },
 
 
@@ -132,19 +134,21 @@ export default {
           users: this.users
         })
         .then(() => {
-          this.loadNewlyRegisteredUsers();
+          this.loadUsers();
           this.showModal = false;
         }); 
       }
     },  
 
-
-    //app/Http/Controllers/API/UserController.php/loadNewlyRegisteredUsers()
-    //Load all the newly registered users.
+    //app/Http/Controllers/API/UserController.php/roleUpdateAll()
+    //Assign individual role to newly registered users.
     loadNewlyRegisteredUsers() {
       //if(this.$gate.isSystemAdministrator())
       //{
-      axios.post("api/user/loadNewRegisteredUser").then(( {data} ) => {this.users = data; console.log("Length: " + Object.keys(this.users.data).length); });
+      axios.get("api/user/loadNewlyRegisteredUsers").then(({ data }) => {
+        this.users = data;
+      });
+
       //}
     },
 
@@ -168,6 +172,7 @@ export default {
               _method: "put",
             })
             .then(() => {
+              $('#divApproveRoleAs').modal(hide);
               this.loadUsers();
             });
         }

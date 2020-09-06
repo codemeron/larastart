@@ -20,17 +20,9 @@ class UserController extends Controller
         $this->middleware('auth:api');
     }
 
-
-    //Resources/js/applicant/ApplicantList.vue/getResults()
-    //Assign individual role to newly registered users.
-    public function newRegisteredUserPagination()
+    public function loadFacultyAndEmployee()
     {
-        return User::where('role', '=', 'Applicant')->paginate(10); 
-    }
-
-    public function index()
-    {
-        return User::where('role', '=', 'Applicant')->paginate(10); 
+        return User::where('role', '!=', 'Applicant')->paginate(5); 
     }
 
     public function store(Request $request)
@@ -137,6 +129,37 @@ class UserController extends Controller
         
     }
 
+    public function destroy($id) 
+    {
+        $this->authorize('isSystemAdministrator');
+
+        $user = User::findOrFail($id);
+        $user->delete();
+    }
+
+    public function search(){
+        if($search = \Request::get('q'))
+        {
+            $users = User::where(function($query) use ($search){
+                $query->where('name', 'LIKE', "%$search%")
+                ->orWhere('email', 'LIKE', "%$search%");
+            })->paginate(10);
+        }else{
+            return User::latest()->paginate(10); 
+        }
+
+        return $users;
+    }
+
+    
+    //Resources/js/applicant/ApplicantList.vue/getResults()
+    //Assign individual role to newly registered users.
+    public function newRegisteredUserPagination()
+    {
+        return User::where('role', '=', 'Applicant')->paginate(5); 
+    }
+
+
     //Resources/js/applicant/ApplicantList.vue/approveRoleAll()
     //Assign individual role to newly registered users.
     public function roleUpdate(Request $request, $idnumber)
@@ -160,31 +183,20 @@ class UserController extends Controller
 
 
     //Resources/views/layouts/master.blade.php/numberOfNewlyRegisteredUser()
+    //Select and view all the records of newly registered user.
+    public function loadNewRegisteredUser(){
+       $query = User::where('role', '=', 'Applicant')->paginate(5);
+
+        return $query;  
+    }
+
+
+    //Resources/views/layouts/master.blade.php/numberOfNewlyRegisteredUser()
     //Get total number of newly registered user.
     public function newRegisteredUser(){
         $countNewlyRegistered = User::where('role', 'Applicant')->count();
 
         return $countNewlyRegistered;
     }
-    public function destroy($id) 
-    {
-        $this->authorize('isSystemAdministrator');
 
-        $user = User::findOrFail($id);
-        $user->delete();
-    }
-
-    public function search(){
-        if($search = \Request::get('q'))
-        {
-            $users = User::where(function($query) use ($search){
-                $query->where('name', 'LIKE', "%$search%")
-                ->orWhere('email', 'LIKE', "%$search%");
-            })->paginate(10);
-        }else{
-            return User::latest()->paginate(10); 
-        }
-
-        return $users;
-    }
 }

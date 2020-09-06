@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="row mt-5" v-if="$gate.isSystemAdministrator()">
+        <div class="row mt-5" >
           <div class="col-12">
             <div class="card" >
               <div class="card-header">
@@ -52,9 +52,9 @@
           </div>
         </div>
 
-        <div class="row mt-5" v-if="!$gate.isSystemAdministrator()">
+        <!--<div class="row mt-5" v-if="!$gate.isSystemAdministrator()">
             <not-found></not-found>
-        </div>
+        </div>-->
     
     <!-- Modal -->
     <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">

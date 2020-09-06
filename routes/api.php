@@ -25,12 +25,15 @@ Route::apiResources([
 ]);
 
 //API/UserController : Approval of Role.
+Route::post('/user/loadNewlyRegisteredUsers', 'API\UserController@loadNewlyRegisteredUsers');
 Route::put('roleUpdate/{idnumber}', 'API\UserController@roleUpdate');
 Route::post('/user/roleUpdateAll', 'API\UserController@roleUpdateAll');
 Route::post('/user/newRegisteredUser', 'API\UserController@newRegisteredUser');
 Route::post('/user/newRegisteredUserPagination', 'API\UserController@newRegisteredUserPagination');
+Route::post('/user/loadNewRegisteredUser', 'API\UserController@loadNewRegisteredUser');
 
-
+//API/UserController : Faculty Viewing of Records.
+Route::put('viewFaculty/{idnumber}', 'API\UserController@roleUpdate');
 
 Route::get('profile', 'API\UserController@profile');
 Route::get('findUser', 'API\UserController@search');

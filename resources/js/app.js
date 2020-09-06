@@ -64,7 +64,7 @@ let routes = [
     { path: '/home', component: require('./components/Dashboard.vue').default },
     { path: '/developer', component: require('./components/Developer.vue').default },
     { path: '/profile', component: require('./components/Profile.vue').default },
-    { path: '/users', component: require('./components/Users.vue').default },
+    { path: '/faculty', component: require('./components/viewrecords/Faculty.vue').default },
     { path: '/applicantlist', component: require('./components/applicant/ApplicantList.vue').default },
 
     { path: '/registerstudent', component: require('./components/registration/reg_student.vue').default },
