@@ -56,7 +56,7 @@
             <not-found></not-found>
         </div>-->
     
-    <!-- Modal -->
+    <!-- Adding Modal -->
     <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -67,27 +67,55 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                 </div>
-                <form @submit.prevent="editMode ? updateUser() : createUser()">
+                 <form @submit.prevent="editMode ? updateUser() : createUser()">
                     <div class="modal-body">
                         <div class="form-group">
-                            <input v-model="form.name" type="text" name="name" id="name"
-                                placeholder="Name"
-                                class="form-control" :class="{ 'is-invalid': form.errors.has('name') }">
-                            <has-error :form="form" field="name"></has-error>
+                            <input v-model="form.idnumber" type="text" name="idnumber" id="idnumber"
+                                placeholder="ID Number"
+                                class="form-control" :class="{ 'is-invalid': form.errors.has('idnumber') }">
+                            <has-error :form="form" field="idnumber"></has-error>
                         </div>
 
                         <div class="form-group">
-                            <input v-model="form.email" type="text" name="email" id="email"
-                                placeholder="Email Address"
+                            <input v-model="form.lastname" type="text" name="lastname" id="lastname"
+                                placeholder="Last Name"
+                                class="form-control" :class="{ 'is-invalid': form.errors.has('lastname') }">
+                            <has-error :form="form" field="lastname"></has-error>
+                        </div>
+
+                        <div class="form-group">
+                            <input v-model="form.firstname" type="text" name="firstname" id="firstname"
+                                placeholder="First Name"
+                                class="form-control" :class="{ 'is-invalid': form.errors.has('firstname') }">
+                            <has-error :form="form" field="firstname"></has-error>
+                        </div>
+
+                        <div class="form-group">
+                            <input v-model="form.middlename" type="text" name="middlename" id="middlename"
+                                placeholder="Middle Name"
+                                class="form-control" :class="{ 'is-invalid': form.errors.has('middlename') }">
+                            <has-error :form="form" field="middlename"></has-error>
+                        </div>
+
+                        <div class="form-group">
+                            <input v-model="form.email" type="email" name="email" id="email"
+                                placeholder="Email"
                                 class="form-control" :class="{ 'is-invalid': form.errors.has('email') }">
                             <has-error :form="form" field="email"></has-error>
                         </div>
 
                         <div class="form-group">
-                            <textarea v-model="form.bio" type="text" name="bio" id="bio"
-                                placeholder="Short bio of the user (Optional)"
-                                class="form-control" :class="{ 'is-invalid': form.errors.has('bio') }"></textarea>
-                            <has-error :form="form" field="bio"></has-error>
+                            <input v-model="form.password" type="password" name="password" id="password"
+                                placeholder="Password"
+                                class="form-control" :class="{ 'is-invalid': form.errors.has('password') }">
+                            <has-error :form="form" field="password"></has-error>
+                        </div>
+
+                        <div class="form-group">
+                            <input v-model="form.repassword" type="repassword" name="repassword" id="repassword"
+                                placeholder="Re-type Password"
+                                class="form-control" :class="{ 'is-invalid': form.errors.has('repassword') }">
+                            <has-error :form="form" field="repassword"></has-error>
                         </div>
 
                         <div class="form-group">
@@ -97,7 +125,7 @@
                                 <option value="Admin">System Administrator</option>
                                 <option value="User">School Administrator</option>
                                 <option value="Author">Program Head</option>
-                                <option value="Author">Adviser</option>
+                                <option value="Author">Faculty</option>
                             </select>
                             <has-error :form="form" field="type"></has-error>
                         </div>
@@ -130,13 +158,14 @@
                 users: {},
                 //Create new form instance
                 form: new Form({
-                    id: '',
-                    name: '',
+                    idnumber: '',
+                    lastname: '',
+                    firstname: '',
+                    middlename: '',
                     email: '',
                     password: '',
-                    type: '',
-                    bio: '',
-                    photos: ''
+                    repassword: '',
+                    role: '' 
                 }),
             }
         },

@@ -5591,6 +5591,62 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5608,8 +5664,8 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    //app/Http/Controllers/API/UserController.php/index()
-    //Pagination for newly registered users.
+    //app/Http/Controllers/API/UserController.php/facultyEmployeePagination()
+    //Pagination for faculty and employee.
     getResults: function getResults() {
       var _this = this;
 
@@ -5620,7 +5676,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     //app/Http/Controllers/API/UserController.php/roleUpdateAll()
-    //Assign individual role to newly registered users.
+    //Load and display the records of faculty and employees.
     loadFacultyEmployee: function loadFacultyEmployee() {
       var _this2 = this;
 
@@ -76204,251 +76260,8 @@ render._withStripped = true
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "row mt-5" }, [
-      _c("div", { staticClass: "col-12" }, [
-        _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-header" }, [
-            _c("h3", { staticClass: "card-title" }, [
-              _vm._v("REGISTERED FACULTY AND EMPLOYEE")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-tools" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-success",
-                  on: {
-                    click: function($event) {
-                      _vm.showModal = true
-                    }
-                  }
-                },
-                [
-                  _vm._v(
-                    "\n              Add Faculty/Employee\n              "
-                  ),
-                  _c("i", { staticClass: "fas fa-user-plus fa-fw" })
-                ]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body table-responsive p-0" }, [
-            _c("table", { staticClass: "table table-hover text-nowrap" }, [
-              _vm._m(0),
-              _vm._v(" "),
-              Object.keys(_vm.users.data).length
-                ? _c(
-                    "tbody",
-                    _vm._l(_vm.users.data, function(user) {
-                      return _c("tr", { key: user.idnumber }, [
-                        _c("td", [_vm._v(_vm._s(user.idnumber))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(user.lastname))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(user.firstname))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(user.middlename))]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(_vm._s(_vm._f("myDate")(user.created_at)))
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(user.role))]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c(
-                            "a",
-                            {
-                              attrs: { href: "#", title: "Edit" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.editModal(user)
-                                }
-                              }
-                            },
-                            [_c("i", { staticClass: "fas fa-edit text-blue" })]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "a",
-                            {
-                              attrs: { href: "#", title: "Delete" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.deleteUser(user.idnumber)
-                                }
-                              }
-                            },
-                            [_c("i", { staticClass: "fas fa-trash text-red" })]
-                          )
-                        ])
-                      ])
-                    }),
-                    0
-                  )
-                : _c("tbody", [_vm._m(1)])
-            ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "card-footer" },
-            [
-              _c("pagination", {
-                attrs: { data: _vm.users },
-                on: { "pagination-change-page": _vm.getResults }
-              })
-            ],
-            1
-          )
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    _vm.showModal
-      ? _c("div", { staticClass: "modal" }, [
-          _c(
-            "div",
-            { staticClass: "modal-dialog", attrs: { role: "document" } },
-            [
-              _c("div", { staticClass: "modal-content" }, [
-                _c("div", { staticClass: "modal-header" }, [
-                  _c("h5", { staticClass: "modal-title" }, [
-                    _vm._v("Approve Role As")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "close",
-                      attrs: {
-                        type: "button",
-                        "data-dismiss": "modal",
-                        "aria-label": "Close"
-                      }
-                    },
-                    [
-                      _c(
-                        "span",
-                        {
-                          attrs: { "aria-hidden": "true" },
-                          on: {
-                            click: function($event) {
-                              _vm.showModal = false
-                            }
-                          }
-                        },
-                        [_vm._v("×")]
-                      )
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _vm._m(2),
-                _vm._v(" "),
-                _c("div", { staticClass: "modal-footer" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-secondary",
-                      attrs: { type: "button" },
-                      on: {
-                        click: function($event) {
-                          _vm.showModal = false
-                        }
-                      }
-                    },
-                    [_vm._v("Close")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary",
-                      attrs: { type: "button" },
-                      on: {
-                        click: function($event) {
-                          return _vm.approveRoleAll()
-                        }
-                      }
-                    },
-                    [_vm._v("Save")]
-                  )
-                ])
-              ])
-            ]
-          )
-        ])
-      : _vm._e()
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("ID")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Name")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Email")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Type")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Date Registered")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Role")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c(
-        "td",
-        { staticClass: "text-center font-italic", attrs: { colspan: "6" } },
-        [_vm._v("No newly registered user.")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-body" }, [
-      _c(
-        "select",
-        { staticClass: "form-control", attrs: { id: "cboApproveAll" } },
-        [
-          _c("option", { attrs: { value: "", selected: "", disabled: "" } }, [
-            _vm._v("--Select a Role--")
-          ]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "Faculty" } }, [_vm._v("Faculty")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "Program Head" } }, [
-            _vm._v("Program Head")
-          ]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "School Administrator" } }, [
-            _vm._v("School Administrator")
-          ])
-        ]
-      )
-    ])
-  }
-]
-render._withStripped = true
+var render = function () {}
+var staticRenderFns = []
 
 
 
