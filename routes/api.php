@@ -32,9 +32,11 @@ Route::post('/user/newRegisteredUser', 'API\UserController@newRegisteredUser');
 Route::post('/user/newRegisteredUserPagination', 'API\UserController@newRegisteredUserPagination');
 Route::post('/user/loadNewRegisteredUser', 'API\UserController@loadNewRegisteredUser');
 
-//API/UserController : Faculty Viewing of Records.
-Route::post('/user/viewFacultyEmployee', 'API\UserController@loadFacultyEmployee');
-Route::post('/user/facultyEmployeePagination', 'API\UserController@facultyEmployeePagination');
+//API/FacultyController : Faculty Viewing of Records.
+Route::post('/faculty/loadFacultyEmployee', 'API\FacultyController@loadFacultyEmployee');
+Route::post('/faculty/facultyEmployeePagination', 'API\FacultyController@facultyEmployeePagination');
+Route::post('/faculty/saveFacultyEmployee', 'API\FacultyController@saveFacultyEmployee');
+Route::post('/faculty/updateFacultyEmployee', 'API\FacultyController@updateFacultyEmployee');
 
 Route::get('profile', 'API\UserController@profile');
 Route::get('findUser', 'API\UserController@search');

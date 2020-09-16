@@ -20,22 +20,6 @@ class UserController extends Controller
         $this->middleware('auth:api');
     }
 
-    public function loadFacultyEmployee()
-    {
-        return User::where('role', '!=', 'Applicant')
-            ->orderBy('lastname')
-            ->paginate(10); 
-    }
-
-    //Resources/js/viewrecords/Faculty.vue/getResults()
-    //Pagination for Faculty and Employee Table.
-    public function facultyEmployeePagination()
-    {
-        return User::where('role', '!=', 'Applicant')
-            ->orderBy('lastname')
-            ->paginate(10);
-    }
-
     public function store(Request $request)
     {
 
