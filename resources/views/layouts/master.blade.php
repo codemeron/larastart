@@ -66,8 +66,8 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <!-- Add icons to the links using the .nav-icon class
-                with font-awesome or any other icon font library -->
+            <!--app/Providers/AuthService.php-->
+            @can('isSystemAdministrator' || 'isSchoolAdministrator' || 'isProgramHead' || 'isAdviser')
             <li class="nav-item">
               <router-link to="/home" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt text-blue"></i>
@@ -76,6 +76,7 @@
                 </p>
               </router-link>
             </li>
+            @endcan
             <!--registration-->
             <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
@@ -137,16 +138,7 @@
               </router-link>
             </li>
             
-            @can('isSystemAdministrator')
-            <li class="nav-item">
-              <router-link to="/developer" class="nav-link">
-                <i class="nav-icon fas fa-cogs"></i>
-                <p>
-                  Developers
-                </p>
-              </router-link>
-            </li>
-
+            @can('isSystemAdministrator' || )
             <li class="nav-item">
               <router-link to="/applicantlist" class="nav-link">
                 <i class="nav-icon fas fa-user-check"></i>
