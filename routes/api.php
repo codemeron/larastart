@@ -39,14 +39,13 @@ Route::post('/faculty/loadFacultyEmployee', 'API\FacultyController@loadFacultyEm
 Route::post('/faculty/facultyEmployeePagination', 'API\FacultyController@facultyEmployeePagination');
 Route::post('/faculty/saveFacultyEmployee', 'API\FacultyController@saveFacultyEmployee');
 Route::put('/faculty/updateFacultyEmployee/{id}', 'API\FacultyController@updateFacultyEmployee');
-Route::put('/faculty/updateFacultyEmployee/{id}', 'API\FacultyController@updateFacultyEmployee');
+Route::delete('/faculty/deleteFacultyEmployee/{idnumber}', 'API\FacultyController@deleteFacultyEmployee');
 
 
 
 Route::get('profile', 'API\UserController@profile');
 Route::get('findUser', 'API\UserController@search');
 Route::put('profile', 'API\UserController@updateProfile');
-
 
 
 

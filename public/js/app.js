@@ -5796,15 +5796,37 @@ __webpack_require__.r(__webpack_exports__);
         console.log(data.statusText);
 
         if (data.statusText == 'OK') {
-          Swal.fire('Information Update!', 'Record has been updated.', 'success');
+          Swal.fire('Update Record', 'Record has been updated.', 'success');
           _this4.showUpdateModal = false;
+
+          _this4.loadFacultyEmployee();
         }
       })["catch"](function (error) {
-        Swal.fire('Update Error!', 'Error encountered during update.', 'error');
+        Swal.fire('Update Record', 'Error encountered during update.', 'error');
       });
     },
     deleteEmployee: function deleteEmployee(idnumber) {
-      this.form["delete"]('');
+      var _this5 = this;
+
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true
+      }).then(function (result) {
+        if (result.value) {
+          axios["delete"]('api/faculty/deleteFacultyEmployee/' + idnumber).then(function () {
+            Swal.fire('Delete Record', 'Record has been updated.', 'success');
+
+            _this5.loadFacultyEmployee();
+          })["catch"](function () {
+            Swal.fire('Delete Record', 'Delete not successful.', 'error');
+          });
+        }
+      });
     }
   },
   created: function created() {
@@ -76454,7 +76476,7 @@ var render = function() {
                               attrs: { href: "#", title: "Delete" },
                               on: {
                                 click: function($event) {
-                                  return _vm.deleteUser(user.idnumber)
+                                  return _vm.deleteEmployee(user.idnumber)
                                 }
                               }
                             },

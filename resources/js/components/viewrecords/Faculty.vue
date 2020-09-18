@@ -41,7 +41,7 @@
                       <a href="#" title="Edit" @click="updateModal(user)">
                           <i class="fas fa-edit text-blue"></i>
                       </a> 
-                      <a href="#" title="Delete" @click="deleteUser(user.idnumber)">
+                      <a href="#" title="Delete" @click="deleteEmployee(user.idnumber)">
                           <i class="fas fa-trash text-red"></i>
                       </a>
                   </td>
@@ -298,17 +298,37 @@ export default {
       .then( (data) => {
         console.log(data.statusText);
         if (data.statusText == 'OK'){
-          Swal.fire('Information Update!', 'Record has been updated.', 'success');
+          Swal.fire('Update Record', 'Record has been updated.', 'success');
           this.showUpdateModal = false;
+          this.loadFacultyEmployee();
         }
       })
       .catch ( (error) => {
-        Swal.fire('Update Error!', 'Error encountered during update.', 'error');
+        Swal.fire('Update Record', 'Error encountered during update.', 'error');
       });
     },
     
     deleteEmployee(idnumber) {
-      this.form.delete('')
+      Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+      }).then((result) => {
+        if (result.value){
+          axios.delete('api/faculty/deleteFacultyEmployee/' + idnumber)
+          .then( () => {
+            Swal.fire('Delete Record', 'Record has been updated.', 'success');
+            this.loadFacultyEmployee();
+          })
+          .catch( () => {
+            Swal.fire('Delete Record', 'Delete not successful.', 'error');
+          });
+        }
+      });
     },
 
   },

@@ -64,11 +64,6 @@ class FacultyController extends Controller
     //Resources/js/viewrecords/Faculty.vue/editFaculty()
     public function updateFacultyEmployee(Request $request, $id)
     {
-        
-        // $user = User::findOrFail($request['idnumber']);
-       
-        //return ['id' => $id];
-
         $this->validate($request, [
             'idnumber'  => 'required|string|max:17|unique:users,idnumber,'. $id,
             'firstname'  => 'required|string|max:50', 
@@ -87,7 +82,12 @@ class FacultyController extends Controller
             'role'  => $request['role'], 
         ]);
         
-        
 
+
+    }
+
+    //Resources/js/viewrecords/Faculty.vue/employeeFaculty()
+    public function deleteFacultyEmployee($idnumber){
+        User::where('idnumber', $idnumber)->delete();
     }
 }
