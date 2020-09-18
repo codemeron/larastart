@@ -67,7 +67,7 @@
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!--app/Providers/AuthService.php-->
-            @can('isSystemAdministrator' || 'isSchoolAdministrator' || 'isProgramHead' || 'isAdviser')
+            @can('isSystemAdministrator')
             <li class="nav-item">
               <router-link to="/home" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt text-blue"></i>
@@ -138,7 +138,7 @@
               </router-link>
             </li>
             
-            @can('isSystemAdministrator' || )
+            @can('isSystemAdministrator')
             <li class="nav-item">
               <router-link to="/applicantlist" class="nav-link">
                 <i class="nav-icon fas fa-user-check"></i>

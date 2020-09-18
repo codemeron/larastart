@@ -32,15 +32,23 @@ Route::post('/user/newRegisteredUser', 'API\UserController@newRegisteredUser');
 Route::post('/user/newRegisteredUserPagination', 'API\UserController@newRegisteredUserPagination');
 Route::post('/user/loadNewRegisteredUser', 'API\UserController@loadNewRegisteredUser');
 
+
+
 //API/FacultyController : Faculty Viewing of Records.
 Route::post('/faculty/loadFacultyEmployee', 'API\FacultyController@loadFacultyEmployee');
 Route::post('/faculty/facultyEmployeePagination', 'API\FacultyController@facultyEmployeePagination');
 Route::post('/faculty/saveFacultyEmployee', 'API\FacultyController@saveFacultyEmployee');
-Route::post('/faculty/updateFacultyEmployee', 'API\FacultyController@updateFacultyEmployee');
+Route::put('/faculty/updateFacultyEmployee/{id}', 'API\FacultyController@updateFacultyEmployee');
+Route::put('/faculty/updateFacultyEmployee/{id}', 'API\FacultyController@updateFacultyEmployee');
+
+
 
 Route::get('profile', 'API\UserController@profile');
 Route::get('findUser', 'API\UserController@search');
 Route::put('profile', 'API\UserController@updateProfile');
+
+
+
 
 Route::put('addStudent', 'API\RegisterStudent@store');
 Route::get('loadStudent', 'API\RegisterStudent@index');

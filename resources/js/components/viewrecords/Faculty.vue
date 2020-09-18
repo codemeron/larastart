@@ -227,6 +227,7 @@ export default {
       showUpdateModal: false,
       users: {},
       form: new Form({
+        id: "",
         idnumber: "",
         firstname: "",
         middlename: "",
@@ -282,6 +283,7 @@ export default {
 
     updateModal(user){
       console.log(user);
+      this.form.id = user.id;
       this.form.idnumber = user.idnumber;
       this.form.lastname = user.lastname;
       this.form.firstname = user.firstname;
@@ -292,13 +294,21 @@ export default {
     },
 
     updateEmployee(){
-      this.form.post('api/faculty/updateFacultyEmployee').then( () => {
-        
+      this.form.put( 'api/faculty/updateFacultyEmployee/' + this.form.id )
+      .then( (data) => {
+        console.log(data.statusText);
+        if (data.statusText == 'OK'){
+          Swal.fire('Information Update!', 'Record has been updated.', 'success');
+          this.showUpdateModal = false;
+        }
+      })
+      .catch ( (error) => {
+        Swal.fire('Update Error!', 'Error encountered during update.', 'error');
       });
     },
     
-    deleteEmployee() {
-
+    deleteEmployee(idnumber) {
+      this.form.delete('')
     },
 
   },

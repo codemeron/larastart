@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Hash;
 
 class FacultyController extends Controller
 {
+ 
+
     public function __construct()
     {
         $this->middleware('auth:api');
@@ -60,17 +62,20 @@ class FacultyController extends Controller
 
 
     //Resources/js/viewrecords/Faculty.vue/editFaculty()
-    public function updateFacultyEmployee(Request $request)
+    public function updateFacultyEmployee(Request $request, $id)
     {
-        $data = $request['users']['data'];
+        
+        // $user = User::findOrFail($request['idnumber']);
+       
+        //return ['id' => $id];
 
         $this->validate($request, [
-            'idnumber'  => 'required|string|max:17|unique:users',
-            'firstname'  => 'required|string|max:50',
-            'middlename'  => 'required|string|max:50', 
+            'idnumber'  => 'required|string|max:17|unique:users,idnumber,'. $id,
+            'firstname'  => 'required|string|max:50', 
+            'middlename' => 'string|max:50', 
             'lastname'  => 'required|string|max:50', 
-            'email'  => 'required|string|max:199|unique:users',
-            'role'  => 'required|string|max:50',  
+            'email'  => 'required|string|max:199|unique:users,idnumber,'. $id,
+            'role'  => 'required|string|max:50',
         ]);
         
         User::where('idnumber', $request['idnumber'])->update([
@@ -81,5 +86,8 @@ class FacultyController extends Controller
             'email' => $request['email'],
             'role'  => $request['role'], 
         ]);
+        
+        
+
     }
 }

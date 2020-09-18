@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 //Manually added
 //Connect to Student Model.
-use App\Student; 
+use App\Model\Student; 
 
 class RegisterStudent extends Controller
 {

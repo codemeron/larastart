@@ -5724,6 +5724,7 @@ __webpack_require__.r(__webpack_exports__);
       showUpdateModal: false,
       users: {},
       form: new Form({
+        id: "",
         idnumber: "",
         firstname: "",
         middlename: "",
@@ -5779,6 +5780,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     updateModal: function updateModal(user) {
       console.log(user);
+      this.form.id = user.id;
       this.form.idnumber = user.idnumber;
       this.form.lastname = user.lastname;
       this.form.firstname = user.firstname;
@@ -5788,9 +5790,22 @@ __webpack_require__.r(__webpack_exports__);
       this.showUpdateModal = true;
     },
     updateEmployee: function updateEmployee() {
-      this.form.post('api/faculty/updateFacultyEmployee').then(function () {});
+      var _this4 = this;
+
+      this.form.put('api/faculty/updateFacultyEmployee/' + this.form.id).then(function (data) {
+        console.log(data.statusText);
+
+        if (data.statusText == 'OK') {
+          Swal.fire('Information Update!', 'Record has been updated.', 'success');
+          _this4.showUpdateModal = false;
+        }
+      })["catch"](function (error) {
+        Swal.fire('Update Error!', 'Error encountered during update.', 'error');
+      });
     },
-    deleteEmployee: function deleteEmployee() {}
+    deleteEmployee: function deleteEmployee(idnumber) {
+      this.form["delete"]('');
+    }
   },
   created: function created() {
     this.loadFacultyEmployee();
